@@ -2,12 +2,26 @@ import requests
 
 # Definir la consulta GraphQL
 query = """
+    # consulta la lista de estudiantes completa con todos los parametros
+    # {
+    #     estudiantes{id,
+    #     nombre
+    #     apellido
+    #     carrera}
+    # },
+    # consulta el nombre solamente de todos losestudiantes
     {
-        estudiante{id,
-        nombre
-        apellido
-        carrera}
+        estudiantes{
+            nombre
+        }
     }
+    # {
+        # Consulta el nombre y el apellido de todos los estudiantes y los muestra
+    #     estudiantes{
+    #         nombre
+    #         apellido
+    #     }
+    # }
 
 """
 
