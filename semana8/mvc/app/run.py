@@ -8,7 +8,7 @@ from database import db
 app = Flask(__name__)
 # Configuración de la base de datos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # Inicializa `db` con la aplicación Flask
 db.init_app(app)  
 # Registra el Blueprint de usuarios

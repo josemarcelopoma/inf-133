@@ -7,7 +7,8 @@ from flask import render_template
 # usuarios y renderiza el template `usuarios.html`
 def usuarios(users):
     return render_template("usuarios.html", users=users)
-    
+
+
 # La función `registro` renderiza el
 # template `registro.html`
 def registro():

@@ -3,7 +3,7 @@ from flask import Blueprint, request, redirect, url_for
 from views import user_view
 # Importamos el modelo de usuario
 from models.user_model import User
-
+from datetime import datetime
 # Un Blueprint es un objeto que agrupa rutas y vistas
 user_bp = Blueprint('user', __name__)
 
@@ -24,8 +24,13 @@ def registro():
         # Obtenemos los datos del formulario
         first_name = request.form['first_name']
         last_name = request.form['last_name']
+        email = request.form['email']
+        contraseña = request.form['contraseña']
+        
+        fecha = datetime.strptime(request.form['fecha'], '%Y-%m-%d').date()
+        
         # Creamos un nuevo usuario
-        user = User(first_name, last_name)
+        user = User(first_name,last_name,email,contraseña,fecha)
         # Guardamos el usuario
         user.save()
         # Redirigimos a la vista de usuarios
