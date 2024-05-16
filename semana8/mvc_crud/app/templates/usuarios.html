@@ -11,10 +11,18 @@
                         <div class="content">
                             <p><strong>Nombre: {{ user.first_name }} </strong></p>
                             <p><strong>Apellido: {{ user.last_name }}</strong></p>
+                            <p><strong>Email: {{ user.Email}}</strong></p>
+                            <p><strong>contraseña: {{ user.Contraseña }}</strong></p>
+                            <p><strong>fecha_nac: {{ user.Fecha_nacimiento}}</strong></p>
                             <div class="buttons">
+
                                 <a href="{{ url_for('user.actualizar', id=user.id) }}" 
                                 class="button is-info">Editar</a>
-                                <a href="/" class="button is-danger">Eliminar</a>
+
+                                <a href="{{ url_for('user.eliminar', id=user.id) }}" 
+                                class="button is-danger">Eliminar</a>
+                                <input type="submit" value="eliminar" class="button is-primary">
+
                             </div>
                         </div>
                     </div>

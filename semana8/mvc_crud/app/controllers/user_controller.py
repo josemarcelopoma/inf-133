@@ -5,7 +5,7 @@ from views import user_view
 
 # Importamos el modelo de usuario
 from models.user_model import User
-
+from datetime import datetime
 # Un Blueprint es un objeto que agrupa
 # rutas y vistas
 user_bp = Blueprint("user", __name__)
@@ -29,10 +29,16 @@ def registro():
         # Obtenemos los datos del formulario
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
+        Email = request.form["Email"]
+        Contraseña = request.form["Contraseña"]
+        Fecha_nacimiento = datetime.strptime(request.form['Fecha_nacimiento'],'%Y-%m-%d').date()
+
         # Creamos un nuevo usuario
-        user = User(first_name, last_name)
+        user = User(first_name, last_name,Email,Contraseña,Fecha_nacimiento)
+
         # Guardamos el usuario
         user.save()
+
         # Redirigimos a la vista de usuarios
         # llamamos al blue print "user" y a la función usuarios
         return redirect(url_for("user.usuarios"))
@@ -63,9 +69,24 @@ def actualizar(id):
     # Obtenemos los datos del formulario
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
+    Email = request.form["Email"]
+    Contraseña = request.form["Contraseña"]
+    Fecha_nacimiento = datetime.strptime(request.form['Fecha_nacimiento'], '%Y-%m-%d').date()
     # Actualizamos los datos del usuario
     user.first_name = first_name
     user.last_name = last_name
+    user.Email = Email
+    user.Contraseña = Contraseña
+    user.Fecha_nacimiento = Fecha_nacimiento
+
     # Guardamos los cambios
     user.update()
+    return redirect(url_for("user.usuarios"))
+
+    
+#se le añade /users/<int:id>/delete con post mas get y el user delete en el modelo y en el controller
+@user_bp.route('/users/<int:id>/delete', methods=["POST","GET"])
+def eliminar(id):
+    user = User.get_by_id(id)
+    user.delete()
     return redirect(url_for("user.usuarios"))

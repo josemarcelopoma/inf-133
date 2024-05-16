@@ -10,12 +10,18 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
+    Email= db.Column(db.String(50), nullable=False)
+    Contraseña= db.Column(db.String(50), nullable=False)
+    Fecha_nacimiento = db.Column(db.Date(), nullable=False)
 
     # Inicializa la clase `User`
-    def __init__(self, first_name, last_name):
+    def __init__(self, first_name, last_name,Email,Contraseña,Fecha_nacimiento):
         self.first_name = first_name
         self.last_name = last_name
-
+        self.Email = Email
+        self.Contraseña = Contraseña
+        self.Fecha_nacimiento = Fecha_nacimiento
+        
     # Guarda un usuario en la base de datos
     def save(self):
         db.session.add(self)
@@ -26,6 +32,7 @@ class User(db.Model):
     def get_all():
         return User.query.all()
 
+
     # Obtiene un usuario por su id
     @staticmethod
     def get_by_id(id):
@@ -33,4 +40,9 @@ class User(db.Model):
 
     # Actualiza un usuario en la base de datos
     def update(self):
+        db.session.commit()
+
+    #tengo que omplementar eliminar 
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
